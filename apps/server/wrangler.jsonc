@@ -14,10 +14,7 @@
 	  },
 	"workers_dev": true,
 	"triggers": {
-	  "crons": [
-		"0 3 * * *",
-		"0 18 * * *"
-	  ]
+	  "crons": ["0 18 * * *"]
 	},
 	"placement": { "mode": "smart" },
 	"vars": {
