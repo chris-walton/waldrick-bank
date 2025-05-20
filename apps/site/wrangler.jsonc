@@ -1,0 +1,29 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "waldrick-bank-site",
+	"main": "./dist/server/server.mjs",
+	"compatibility_date": "2025-05-20",
+	"account_id": "ce9999d7d59fce98a0bc0e7911cb6e1f",
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	},
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist/browser"
+	},
+	"routes": [
+		{
+			"pattern": "lola-banking.waldrickservices.com",
+			"custom_domain": true
+		}
+	],
+	"dev": {
+		"ip": "*",
+		"port": 4200
+	}
+}

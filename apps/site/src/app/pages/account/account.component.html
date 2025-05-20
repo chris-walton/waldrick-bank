@@ -1,0 +1,59 @@
+@let model = account.value();
+@if (model) {
+    <div class="container mt-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">{{ model.name }}</h2>
+                <h3 class="card-subtitle mb-2 text-muted">
+                    Balance: {{ formatCurrency(model.balance) }}
+                </h3>
+            </div>
+        </div>
+
+        <h4>
+            Transactions
+            <button
+                ejs-button
+                cssClass="e-small e-flat"
+                (click)="showTransactionModal()"
+            >
+                <span class="fs-4">+</span>
+            </button>
+        </h4>
+        <app-transaction-grid [transactions]="transactions.value() ?? []" />
+    </div>
+} @else if (account.isLoading()) {
+    <div class="container mt-4">
+        <div class="alert alert-info" role="alert">
+            Loading...
+        </div>
+    </div>
+} @else {
+    <div class="container mt-4">
+        <div class="alert alert-warning" role="alert">
+            Account not found
+        </div>
+    </div>
+}
+
+<div id="dialog-container">
+    <ejs-dialog
+        #transactionDialog
+        target="#dialog-container"
+        [header]='"New Transaction"'
+        [showCloseIcon]="true"
+        [isModal]="true"
+        [visible]="false"
+        [width]="400"
+    >
+        <ng-template #content>
+            <div>
+                <app-transaction-form
+                    #transactionForm
+                    (submitted)="createTransaction($event)"
+                    (cancelled)="closeTransactionModal()"
+                />
+            </div>
+        </ng-template>
+    </ejs-dialog>
+</div>
