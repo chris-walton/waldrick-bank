@@ -2,6 +2,7 @@
   "name": "waldrick-bank",
   "private": true,
   "scripts": {
+    "pre_dev": "npx syncfusion-license activate",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
@@ -16,9 +17,11 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "npm@10.2.4",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  "packageManager": "pnpm@9.14.2",
+  "description": "This Turborepo starter is maintained by the Turborepo core team.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

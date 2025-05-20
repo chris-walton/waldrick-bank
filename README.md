@@ -1,84 +1,84 @@
-# Turborepo starter
+# Waldrick Bank
 
-This Turborepo starter is maintained by the Turborepo core team.
+A simple banking application for tracking savings with daily interest
+calculations.
 
-## Using this example
+## Features
 
-Run the following command:
+- Track account balance
+- Record deposits and withdrawals
+- Calculate daily interest
+- View transaction history
 
-```sh
-npx create-turbo@latest
-```
+## Tech Stack
 
-## What's inside?
+- Frontend: Angular 17
+- Backend: Cloudflare Workers with Azure Cosmos DB
+- Shared: TypeScript package for common types and utilities
 
-This Turborepo includes the following packages/apps:
+## Setup
 
-### Apps and Packages
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+2. Create an Azure Cosmos DB account and database:
+   - Create a new Cosmos DB account in Azure Portal
+   - Create a database named `waldrick_bank`
+   - Create a container named `accounts` with partition key `/id`
+   - Get the endpoint and key from the Azure Portal
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+3. Update the environment variables in `apps/backend/wrangler.toml`:
+   ```toml
+   [vars]
+   COSMOS_ENDPOINT = "your-cosmos-endpoint"
+   COSMOS_KEY = "your-cosmos-key"
+   COSMOS_DATABASE = "waldrick_bank"
+   COSMOS_CONTAINER = "accounts"
+   ```
 
-### Utilities
+4. Create the initial account document:
+   ```json
+   {
+       "id": "1",
+       "balance": 0,
+       "interestRate": 0.05,
+       "lastInterestCalculation": null,
+       "transactions": []
+   }
+   ```
 
-This Turborepo has some additional tools already setup for you:
+5. Start the development servers:
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+   Backend:
+   ```bash
+   cd apps/backend
+   npm run dev
+   ```
 
-### Build
+   Frontend:
+   ```bash
+   cd apps/frontend
+   ng serve
+   ```
 
-To build all apps and packages, run the following command:
+## Development
 
-```
-cd my-turborepo
-pnpm build
-```
+- Frontend runs on `http://localhost:4200`
+- Backend runs on `http://localhost:8787`
 
-### Develop
+## Deployment
 
-To develop all apps and packages, run the following command:
+1. Deploy the backend:
+   ```bash
+   cd apps/backend
+   npm run deploy
+   ```
 
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+2. Build and deploy the frontend:
+   ```bash
+   cd apps/frontend
+   ng build
+   # Deploy the dist folder to your hosting provider
+   ```
