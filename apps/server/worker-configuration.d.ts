@@ -3,6 +3,7 @@
 // Runtime types generated with workerd@1.20250508.0 2025-05-19 
 declare namespace Cloudflare {
     interface Env {
+        BALANCE_QUEUE: Queue<string>;
         COSMOS_ENDPOINT: "https://waldrick-banking.documents.azure.com";
         COSMOS_DATABASE: "db";
         COSMOS_KEY: string;

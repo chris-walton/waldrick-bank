@@ -24,5 +24,21 @@
 	"dev": {
 		"ip": "*",
 		"port": 88
+	},
+	"queues": {
+		"producers": [
+			{
+				"binding": "BALANCE_QUEUE",
+				"queue": "lola-banking-balance-update"
+			}
+		],
+		"consumers": [
+			{
+		        "queue": "lola-banking-balance-update",
+				"max_batch_size": 10,
+				"max_batch_timeout": 30,
+				"max_retries": 3
+			}
+		]
 	}
 }

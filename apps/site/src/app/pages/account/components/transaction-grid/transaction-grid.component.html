@@ -10,6 +10,15 @@
             headerText="Description"
         />
         <e-column
+            field="type"
+            headerText="Type"
+            [template]="typeTemplate"
+        >
+            <ng-template #typeTemplate let-data>
+                <span>{{ data.type | capitalize }}</span>
+            </ng-template>
+        </e-column>
+        <e-column
             field="amount"
             headerText="Amount"
             format="N2"

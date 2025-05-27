@@ -15,7 +15,8 @@ export class AccountingService {
 
     calculateBalance(transactions: Transaction[]): number {
         return transactions.reduce((acc, transaction) => {
-            return acc + transaction.amount;
+            const delta = transaction.type === 'withdrawal' ? -1 : 1;
+            return acc + (transaction.amount * delta);
         }, 0);
     }
 
